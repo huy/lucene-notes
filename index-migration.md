@@ -57,7 +57,7 @@ As described above, index uprade can happens gradually during merging (aka silen
 
 ### Things to consider
 
-Lucene makes a best effort to easy the uprade process. It includes handful of old codec(s) to make the library work with segments on many old codec. Never the less, there are still things to be verified and considered when doing upgrade.
+Lucene makes a best effort to easy the uprade process involving huge index. It includes handful of old codec(s) to make the library work with segments on many old codec. Never the less, there are still things to be verified and considered when doing upgrade.
 
 **Available codec(s)**
 
