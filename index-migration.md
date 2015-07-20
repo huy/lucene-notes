@@ -55,7 +55,7 @@ It is done by creating a new segment and copy data from old segments into it. A 
 
 **Index upgrade**
 
-As described above, index uprade can happens gradually during merging (aka silent upgrade). Lucene however allows explicit once time index upgrade through `org.apache.lucene.index.IndexUprader` class. Behind the scene, it merges all old format segments into new created segement.
+As described above, index uprade can happens gradually during merging (aka silent upgrade). Lucene however allows explicit once time index upgrade through `org.apache.lucene.index.IndexUprader` class. Behind the scene, it merges all old format segments into new created segment.
 
 
 
