@@ -53,6 +53,6 @@ Having too many segments may reach OS limit as well as consume at lot of OS file
 
 It is done by creating a new segment and copy data from old segments into it. A new segment is created using the most recent codec, which means segment migration happens gradually without downtime and/or performance impact. 
 
-
+**Index migration**
 
 
