@@ -1,4 +1,4 @@
-## Lucene index
+## Lucene index migration
 
 Lucene persists its data in an index. If the media is file system then index is a directory containing a set of data files. 
 
