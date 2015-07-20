@@ -65,6 +65,10 @@ Check the available codecs against one specified in `.si` files. Each codec impl
 
 **Performance impact** 
 
-Decide whether to perform once time upgrade or let Lucene to do silent upgrade. The questions to ask is if there is any peformance penalty when reading and deserializing the old format. 
+Decide whether to perform once time upgrade or let Lucene to do silent upgrade. The questions to ask is if there is any peformance penalty of searching with old format segments. 
+
+We hope that deserializing old format by the new code will not be worse than doing the same by old code unless there is significal mismatch between in memory data structure(s).
+
+
 
 
