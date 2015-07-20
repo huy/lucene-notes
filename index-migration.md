@@ -28,9 +28,7 @@ Lucene index has composite structure, which mean an index consists of several su
     -rw-r--r--  1 huyle  staff  341 19 Jul 09:15 segments_1
     -rw-r--r--  1 huyle  staff    0 19 Jul 08:06 write.lock
 
-The index contains two segments `0` and `1`. Each segment is represented by 3 files with ext `.si`, `.cfs`, `.cfe`. The `.si` file is metadata of the segment while `.cfe` and `.cfs` contains entries and data in compound form, which means different data types are packed into the same file instead of separated file per data type.
-
-The codec used to deserialized data file back to memory is written in `.si` file. e.g.
+The index contains two segments `0` and `1`. Each segment is represented by 3 files with ext `.si`, `.cfs`, `.cfe`. The `.si` file is metadata of the segment while `.cfe` and `.cfs` contains entries and data in compound form, which means different data types are packed into the same file instead of separated file per data type. The codec used to deserialized data file back to memory is written in `.si` file. e.g.
 
     $ xxd _0.si
     0000000: 3fd7 6c17 134c 7563 656e 6534 3053 6567  ?.l..Lucene40Seg
@@ -41,7 +39,7 @@ The codec used to deserialized data file back to memory is written in `.si` file
 
 Lucene index follows single writer multiple reader paradigm. The active segment is segment currently used by the writer. Everytime the writer attempts to add/remove document, a new segment is created using the most recent codec.
 
-When migrating to a new version of Lucene, we may endup with a index having some segments encoded by old codec and others by new codec. Lucene includes handful of old codec(s) to make library work with segments on certains old codec.
+When migrating to a new version of Lucene, we may endup with a index having some segments encoded by old codec and others by new codec.
 
 The reason behind such design is to support incremental indexing with concurrent access. Its clever design means when searching is still in progress we can safely add/remove document without expensive synchronization because the search always sees the index at a point time it was opened.
 
@@ -56,5 +54,10 @@ It is done by creating a new segment and copy data from old segments into it. A 
 As described above, index uprade can happens gradually during merging (aka silent upgrade). Lucene however allows explicit once time index upgrade through `org.apache.lucene.index.IndexUprader` class. Behind the scene, it merges all old format segments into new created segment.
 
 **Things to consider**
+
+Lucene makes a best effort to easy the uprade process. It includes handful of old codec(s) to make the library work with segments on many old codec. Never the less, there are still things to be verified and considered when doing upgrade.
+
+1. Check the available codecs against one specified in `.si` files. Each codec implemented in form of a package e.g. the present of `org.apache.lucene.codecs.lucene42` mean that the library can read segment in 4.2 format.
+2. Decide whether to perform once time upgrade or let Lucene to do silent upgrade. The questions to ask is if there is any peformance penalty when reading and deserializing the old format. 
 
 
