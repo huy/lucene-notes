@@ -51,7 +51,7 @@ The reason behind such design is to support incremental indexing with concurrent
 
 Having too many segments may reach OS limit as well as consume at lot of OS file handles and hurt performance. Lucene at its own discretion (depending on specified merge policy) merge many non active segments into single one reducing number of files in the index directory.
 
-It is done by creating a new segment and copy data from old segments into it. A new segment is created using the most recent codec.
+It is done by creating a new segment and copy data from old segments into it. A new segment is created using the most recent codec, which means segment migration happens gradually without downtime and/or performance impact. 
 
 
 
