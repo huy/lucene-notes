@@ -1,14 +1,14 @@
 ## Lucene index migration
 
+This article tries to shed some light on Lucene index migration, which is neccesary part of library upgrade process.
+
 ### Understanding index
 
-Lucene persists its data in an index. If the media is file system then index is a directory containing a set of data files. 
+Lucene persists its data in an index. Assuming the media is file system then index is a directory containing a set of data files. 
 
 **Codec**
 
-There are different data types, the way how each data type is serialized (aka data format) is dictated by codec. 
-
-As Lucene code evolves so the codec. Codec version is not neccesary the same as Lucene release version. 
+There are different data types, the way how each data type is serialized (aka data format) is dictated by codec. As Lucene code evolves so the codec. Codec version is not neccesary the same as Lucene release version. 
 E.g. the default codec version of Lucene 4.4.x is 4.2 while the default codec of Lucene 4.9.x is 4.9. We can find codec version by looking at class `org.apache.lucene.codecs.Codec`  e.g.
 
     ...
@@ -68,7 +68,5 @@ Check the available codecs against one specified in `.si` files. Each codec impl
 Decide whether to perform once time upgrade or let Lucene to do silent upgrade. The questions to ask is if there is any peformance penalty of searching with old format segments. 
 
 We hope that deserializing old format by the new code will not be worse than doing the same by old code unless there is significal mismatch between in memory data structure(s).
-
-
 
 
