@@ -59,7 +59,12 @@ As described above, index uprade can happens gradually during merging (aka silen
 
 Lucene makes a best effort to easy the uprade process. It includes handful of old codec(s) to make the library work with segments on many old codec. Never the less, there are still things to be verified and considered when doing upgrade.
 
-1. Check the available codecs against one specified in `.si` files. Each codec implemented in form of a package e.g. the present of `org.apache.lucene.codecs.lucene42` mean that the library can read segment in 4.2 format.
-2. Decide whether to perform once time upgrade or let Lucene to do silent upgrade. The questions to ask is if there is any peformance penalty when reading and deserializing the old format. 
+**Available codec(s)**
+
+Check the available codecs against one specified in `.si` files. Each codec implemented in form of a package e.g. the present of `org.apache.lucene.codecs.lucene42` mean that the library can read segment in 4.2 format.
+
+**Performance impact** 
+
+Decide whether to perform once time upgrade or let Lucene to do silent upgrade. The questions to ask is if there is any peformance penalty when reading and deserializing the old format. 
 
 
