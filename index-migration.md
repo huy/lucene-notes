@@ -1,5 +1,7 @@
 ## Lucene index migration
 
+### Understanding index
+
 Lucene persists its data in an index. If the media is file system then index is a directory containing a set of data files. 
 
 **Codec**
@@ -53,7 +55,7 @@ It is done by creating a new segment and copy data from old segments into it. A 
 
 As described above, index uprade can happens gradually during merging (aka silent upgrade). Lucene however allows explicit once time index upgrade through `org.apache.lucene.index.IndexUprader` class. Behind the scene, it merges all old format segments into new created segment.
 
-**Things to consider**
+### Things to consider
 
 Lucene makes a best effort to easy the uprade process. It includes handful of old codec(s) to make the library work with segments on many old codec. Never the less, there are still things to be verified and considered when doing upgrade.
 
