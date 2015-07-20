@@ -43,7 +43,7 @@ The codec used to deserialized data file back to memory is written in `.si` file
 
 Lucene index follows single writer multiple reader paradigm. The active segment is segment currently used by the writer. Everytime the writer attempts to add/remove document, a new segment is created using the most recent codec.
 
-When migrating to a new version of Lucene, we may endup with a index having some segments encoded by old codec and others by new codec. Lucene includes handful of old codec to make library upgrade smooth.
+When migrating to a new version of Lucene, we may endup with a index having some segments encoded by old codec and others by new codec. Lucene includes handful of old codec(s) to make library upgrade smooth.
 
 The reason behind such design is to support incremental indexing with concurrent access. Its clever design means when searching is still in progress we can safely add/remove document without expensive synchronization because the search always sees the index at a point time it was opened.
 
