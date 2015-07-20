@@ -45,4 +45,9 @@ Lucene index follows single writer multiple reader paradigm. The active segment 
 
 The reason behind such design is to support incremental indexing with concurrent access. Its clever design means when searching is still in progress we can safely add/remove document without expensive synchronization. Because the search always sees the index at a point time of it was opened.
 
+**Merging segments**
+
+
+
+
 
