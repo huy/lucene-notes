@@ -45,7 +45,7 @@ Lucene index follows single writer multiple reader paradigm. The active segment 
 
 When migrating to a new version of Lucene, we may endup with a index having some segments encoded by old codec and others by new codec. Lucene includes handful of old codec to make library upgrade smooth.
 
-The reason behind such design is to support incremental indexing with concurrent access. Its clever design means when searching is still in progress we can safely add/remove document without expensive synchronization. Because the search always sees the index at a point time of it was opened.
+The reason behind such design is to support incremental indexing with concurrent access. Its clever design means when searching is still in progress we can safely add/remove document without expensive synchronization. Because the search always sees the index at a point time it was opened.
 
 **Merging segments**
 
