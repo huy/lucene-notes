@@ -1,6 +1,6 @@
 ## Wild card query demystify
 
-Wild card query is kind of query where search string is in form of `*ild*` or `?ild*`. Lucene document tells us  quoted
+Wild card query is kind of query where search string is in form of e.g. `*ild*` or `?ild*`. Lucene document tells us quoted
 
     this query can be slow, as it needs to iterate over many terms. In order to prevent extremely slow
     WildcardQueries, a Wildcard term should not start with the wildcard
