@@ -22,7 +22,7 @@ It returns a set of documents that satisfy the wrapped query. Filter is tightly 
 
 Important things about Lucene low level search operation are
 
-* elementary search operation use inverted index which basically maps a term to a set of documents containing this term
+* elementary search operation use inverted index which basically maps a term (aka word) to a set of documents containing specified term. This literally means for an elemetary seach a term is needed.
 * result of elementary search is a bit map representing a set of documents
 * complex query is decomposed into serie of elemetary queries, each is evaluated, then their result are union and/or intersect to form a final list of hit documents
 
