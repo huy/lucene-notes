@@ -15,15 +15,15 @@ Lucene provides `org.apache.lucene.search.Filter` abstract class in low level se
 
 It takes 2 arguments 
 
-* `LeafReaderContext` is used to read data from index segment file aka sub index.
-* `Bits` is a bitmap representing live documents i.e. all except deleted documents, note that `null` instead of all 1 bit map is used to represent a situation when we haven't deleted any documents from the index segment. 
+1. `LeafReaderContext` is used to read data from index segment file aka sub index.
+2. `Bits` is a bitmap representing live documents i.e. all except deleted documents, note that `null` instead of all 1 bit map is used to represent a situation when we haven't deleted any documents from the index segment. 
 
 It returns a set of documents that satisfy the wrapped query. Filter is tightly coupled with Query, so we may see excution logic juggling between them. 
 
 Two important things about Lucene low level search operation are
 
-* it is based on inverted index, which basically maps a term to a set of documents containing this term
-* result of elementary search is a bit map representing a set of documents. Complex query is decomposed into serie of elemetary queries, each is then evaluated, then Lucene union and/or intersect their result(s) to form a final list of hit documents.
+1. it is based on inverted index, which basically maps a term to a set of documents containing this term
+2. result of elementary search is a bit map representing a set of documents. Complex query is decomposed into serie of elemetary queries, each is then evaluated, then Lucene union and/or intersect their result(s) to form a final list of hit documents.
  
 
 
