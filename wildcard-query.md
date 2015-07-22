@@ -28,7 +28,7 @@ Important things about Lucene low level search operation are
 
 **Wild card query execution**
 
-To evaluate wild card query, Lucene first iterates over dictionary of all terms of the field specified in the query, filter out all terms that aren't matched the wild cards. For each matched term, it runs an elementary seach to retrieve set of relevant documents and union these together.
+To evaluate wild card query, Lucene (using segment reader from `LeafReaderContext`) first iterates over a dictionary of all terms of the field specified in the query, filter out all terms that aren't matched the wild cards. For each matched term, it runs an elementary seach to retrieve set of relevant documents and union these together.
 
 
 
