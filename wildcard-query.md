@@ -38,6 +38,8 @@ The main execution loop is over each matched term, so the memory consumption is 
 
 **number of IO**
 
+The need to read entired dictionary of all terms may raise a flag but it shouldn't be as Lucene uses burst trie data structure to compress data so the dictionary file is tiny compare to other files in the index.
+
 **CPU cycle**
 
 
