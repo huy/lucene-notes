@@ -20,10 +20,12 @@ It takes 2 arguments
 
 It returns a set of documents that satisfy the wrapped query. Filter is tightly coupled with Query, so we may see excution logic juggling between them. 
 
-Two important things about Lucene low level search operation are
+Important things about Lucene low level search operation are
 
-1. it is based on inverted index, which basically maps a term to a set of documents containing this term
-2. result of elementary search is a bit map representing a set of documents. Complex query is decomposed into serie of elemetary queries, each is evaluated, then Lucene union and/or intersect their result(s) to form a final list of hit documents.
+* elementary search operation use inverted index which basically maps a term to a set of documents containing this term
+* result of elementary search is a bit map representing a set of documents
+* complex query is decomposed into serie of elemetary queries, each is evaluated, then their result are union and/or intersect to form a final list of hit documents
+
  
 
 
