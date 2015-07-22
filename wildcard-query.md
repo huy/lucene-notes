@@ -28,9 +28,18 @@ Important things about Lucene low level search operation are
 * result of elementary search is a bit map representing a set of documents
 * complex query is decomposed into serie of elemetary queries, each is evaluated, then their result are union and/or intersect to form a final list of hit documents
 
-**Wild card query execution**
+**Wild card query execution and performance impact**
 
-To evaluate wild card query, Lucene (using segment reader from `LeafReaderContext`) first iterates over a dictionary of all terms of the field specified in the query, filter out all terms that aren't matched the wild cards. For each matched term, it runs an elementary seach to retrieve set of relevant documents and union them together.
+To evaluate wild card query, Lucene (using segment reader from `LeafReaderContext`) first iterates over a dictionary of all terms of the field specified in the query, filter out all terms that aren't matched the wild cards. For each matched term, it runs an elementary seach to retrieve set of relevant documents and merge them together.
+
+**Memory consumption**
+
+The main execution loop is over each matched term, so the memory consumption is roughly the same as of any other queries. To be precise, we need bitmap capable of holding all documents of the index segment.
+
+**number of IO**
+
+**CPU cycle**
+
 
 
 
