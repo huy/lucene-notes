@@ -26,6 +26,11 @@ Important things about Lucene low level search operation are
 * result of elementary search is a bit map representing a set of documents
 * complex query is decomposed into serie of elemetary queries, each is evaluated, then their result are union and/or intersect to form a final list of hit documents
 
- 
+**Wild card query execution**
+
+To evaluate wild card query, Lucene first iterates over dictionary of all terms of the field specified in the query, filter out all terms that aren't matched the wild cards. For each matched term, it runs an elemetary seach to retrieve set of relevant documents and union these together.
+
+
+
 
 
