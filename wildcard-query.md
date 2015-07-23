@@ -9,7 +9,15 @@ As part of my study how to fix a bug in filename search in Confluence, I take ti
 
 **Query execution**
 
-Query execution is implemented in these tightly coupled classes `Query`, `Filter`, `Weight`, `Scorer`, so we may see excution logic juggling between them. `Query` creates `Weight`, which in turn create `Scorer`. `Score` is an iterator over documents satisfied a given query. 
+A complex query is decomposed into tree of sub queries, each is evaluated lazily bottom up, their future results are combined in form of document iterator (namely `Scorer`) satisfied the given query. 
+
+Query execution is implemented in these tightly coupled classes `Query`, `Filter`, `Weight`, `Scorer`, so we may see excution logic juggling between them. `Query` creates `Weight`, which in turn create `Scorer`. `Scorer` is an iterator over documents satisfied a given query. 
+
+At bottom of the tree are `TermQuery`, `TermWeight`, `TermScorer`. 
+
+* elementary search operation use inverted index which basically maps a term (aka word) to a set of documents containing specified term. This literally means for an elemetary seach a term is needed.
+* result of elementary search is a bit map representing a set of documents
+
 
 Lucene provides `org.apache.lucene.search.Filter` abstract class in low level search API. Query is wrapped inside  `Filter`. One method of `Filter` class is
 
@@ -19,12 +27,6 @@ It takes 2 arguments
 
 1. `LeafReaderContext` is used to read data from index segment file (aka sub index).
 2. `Bits` is a bitmap representing live documents i.e. all except deleted documents, note that `null` instead of all 1 bit map is used to represent a situation when we haven't deleted any documents from the index segment. 
-
-It returns a set of documents that satisfy the wrapped query. Important things about Lucene low level search operation are
-
-* elementary search operation use inverted index which basically maps a term (aka word) to a set of documents containing specified term. This literally means for an elemetary seach a term is needed.
-* result of elementary search is a bit map representing a set of documents
-* complex query is decomposed into serie of elemetary queries, each is evaluated, then their result are union and/or intersect to form a final list of hit documents
 
 **Combine result from individual segment search**
 
