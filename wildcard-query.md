@@ -13,7 +13,7 @@ A complex query is rewrite i.e. decomposed into a tree of sub queries, each is e
 
 Elementary query at leaf of a query tree use inverted index which basically maps a term to a set of documents containing specified term. This literally means for an elemetary query to work a term is needed.
 
-In a traditional query, a complete terms are presented itself in the query expression. In other type of query like wild card, fuzzy, regex, Lucene has to figure out set of terms from the query expression. It does by iterating over a dictionary of all terms and fiter out un matched terms.
+In a traditional query, a complete terms are presented itself in the query expression. In other type of query like wild card, fuzzy, regex, Lucene has to figure out set of terms from the query expression. It does by iterating over a dictionary of all terms and figure out matched terms.
 
 **Wild card query execution and performance impact**
 
