@@ -11,9 +11,9 @@ As part of my study how to fix a bug in filename search in Confluence, I take ti
 
 A complex query is rewrite i.e. decomposed into a tree of sub queries, each is evaluated lazily bottom up, their future results are combined in form of document iterator satisfied the given query. 
 
-Query execution is implemented in these tightly coupled classes `Query`, `Filter`, `Weight`, `Scorer`, so we may see excution logic juggling between them. `Filter` encapsulates `Query`, which creates `Weight`, which in turn create `Scorer`. `Scorer` is an iterator over documents satisfied a given query. 
+Elementary query at leaf of a query tree use inverted index which basically maps a term to a set of documents containing specified term. This literally means for an elemetary query to work a term is needed.
 
-Elementary query at leafs of a query tree use inverted index which basically maps a term to a set of documents containing specified term. This literally means for an elemetary query to work a term is needed.
+In a traditional query, a complete terms are presented itself in the query expression. In other type of query like wild card, fuzzy, regex, Lucene has to figure out set of terms from the query expression. It does by iterating over a dictionary of all terms and fiter out un matched terms.
 
 **Wild card query execution and performance impact**
 
