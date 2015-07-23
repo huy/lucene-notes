@@ -18,7 +18,7 @@ It takes 2 arguments
 1. `LeafReaderContext` is used to read data from index segment file (aka sub index).
 2. `Bits` is a bitmap representing live documents i.e. all except deleted documents, note that `null` instead of all 1 bit map is used to represent a situation when we haven't deleted any documents from the index segment. 
 
-It returns a set of documents that satisfy the wrapped query. Filter is tightly coupled with Query, so we may see excution logic juggling between them. 
+It returns a set of documents that satisfy the wrapped query. Filter is tightly coupled with Query, Weight and Scorer, so we may see excution logic juggling between them. 
 
 Important things about Lucene low level search operation are
 
