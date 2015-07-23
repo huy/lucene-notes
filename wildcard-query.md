@@ -44,7 +44,7 @@ The worry part of wild card query evaluation is this part of code in class `org.
     } while(termsEnum.next() != null);
     return bitSet;
 
-
+If a wild card expands to too many terms, then the operation will be expensive. But it may imply that the wild card is not restrictive enough and the search will likely return many hits. 
 
 
 
