@@ -49,7 +49,7 @@ The operation will become expensive if the wild card expands to too many terms a
 Notes
 
 * This source code is taken from Lucene 4.4.0
-* In current Lucene trunk, the behavoir is more less the same if the wild card expands to number of terms exceeding certain threshold (currently set to 16).
+* In current Lucene trunk, the behaviour is more less the same if the wild card expands to number of terms exceeding certain threshold (currently set to 16).
 
 **What we do to mitigate it**
 
