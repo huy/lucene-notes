@@ -44,7 +44,7 @@ The worry part of wild card query evaluation is this part of code in class `org.
     } while(termsEnum.next() != null);
     return bitSet;
 
-The operation will become expensive if the wild card expands to too many terms and each term has just few documents in the inverted index. It is quite possible e.g. when term is filename.
+The operation will become expensive if the wild card expands to too many terms and each term corresponds to just few documents in the inverted index. It is quite possible e.g. when term is filename.
 
 **What we do to mitigate it**
 
