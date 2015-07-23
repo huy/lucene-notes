@@ -7,7 +7,7 @@ Wild card query is kind of query where search string is in form of e.g. `*ild*` 
 
 As part of my study how to fix a bug in filename search in Confluence, I take time to look at Lucene source code to understand how wild card query is evaluated from performance and resource consumption perspective.
 
-**Query execution**
+### How query is executed
 
 A complex query is rewrite i.e. decomposed into a tree of sub queries, each is evaluated lazily bottom up, their lazy results are combined in form of document iterator satisfied the given query. 
 
@@ -15,7 +15,7 @@ Elementary query at leaf of a query tree uses inverted index to retrieve set of 
 
 In a traditional query, a complete terms are presented itself in the query expression. In other type of query like wild card, fuzzy, regex, Lucene has to figure out set of terms from the query expression. It does so by iterating over a dictionary of all terms and filter out un matched terms.
 
-**Wild card query execution and performance impact**
+### Wild card query and performance impact
 
 To evaluate wild card query, Lucene first iterates over a dictionary of all terms of the field specified in the query, filter out all terms that aren't matched the wild cards. For each matched term, it retrieves set of relevant documents containing the matched term and merges them together.
 
@@ -44,10 +44,9 @@ The worry part of wild card query evaluation is this part of code in class `org.
     } while(termsEnum.next() != null);
     return bitSet;
 
-If a wild card expands to too many terms, then the operation will be expensive. But it may imply that the wild card is not restrictive enough and the search will likely return many hits. 
+The operation will become expensive if the wild card expands to too many terms. 
 
+**How we can mitigate it**
 
-
-
-
+If a wild card expands to too many terms, it also mean that the wild card is not restrictive enough and the search will likely return many hits. 
 
