@@ -9,7 +9,7 @@ As part of my study how to fix a bug in filename search in Confluence, I take ti
 
 ### How query is executed
 
-A complex query is rewrite i.e. decomposed into a tree of sub queries, each is evaluated lazily bottom up, their lazy results are combined in form of document iterator satisfied the given query. 
+A complex query is rewrite i.e. decomposed into a tree of sub queries, each is evaluated lazily bottom up, their lazy results are combined in form of document iterator `DocEnum` satisfying the given query. 
 
 Elementary query at leaf of a query tree uses inverted index to retrieve set of documents containing specified term. This literally means for an elemetary query to work a term is needed.
 
@@ -17,7 +17,7 @@ In a traditional query, a complete terms are presented itself in the query expre
 
 ### Wild card query and performance impact
 
-To evaluate wild card query, Lucene first iterates over a dictionary of all terms of the field specified in the query, filter out all terms that aren't matched the wild cards. For each matched term, it retrieves set of relevant documents containing the matched term and merges them together.
+To evaluate wild card query, Lucene first iterates over a dictionary of all terms of the field specified in the query, filter out all terms that don't match the wild cards. For each matching term, it retrieves set of relevant documents containing the term and merges them together.
 
 **Memory consumption**
 
