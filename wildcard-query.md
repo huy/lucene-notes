@@ -9,11 +9,11 @@ As part of my study how to fix a bug in filename search in Confluence, I take ti
 
 **Query execution**
 
-A complex query is rewrite i.e. decomposed into a tree of sub queries, each is evaluated lazily bottom up, their future results are combined in form of document iterator satisfied the given query. 
+A complex query is rewrite i.e. decomposed into a tree of sub queries, each is evaluated lazily bottom up, their lazy results are combined in form of document iterator satisfied the given query. 
 
 Elementary query at leaf of a query tree uses inverted index to retrieve set of documents containing specified term. This literally means for an elemetary query to work a term is needed.
 
-In a traditional query, a complete terms are presented itself in the query expression. In other type of query like wild card, fuzzy, regex, Lucene has to figure out set of terms from the query expression. It does so by iterating over a dictionary of all terms to figure out matched terms.
+In a traditional query, a complete terms are presented itself in the query expression. In other type of query like wild card, fuzzy, regex, Lucene has to figure out set of terms from the query expression. It does so by iterating over a dictionary of all terms and filter out un matched terms.
 
 **Wild card query execution and performance impact**
 
@@ -23,11 +23,10 @@ To evaluate wild card query, Lucene first iterates over a dictionary of all term
 
 The main execution loop is over each matched term, so the memory consumption is roughly the same as of any other queries. To be precise, what we need is a bit array capable of holding all documents of an index segment.
 
-**Number of IO**
+**IO and CPU**
 
-The need to read entired dictionary of all terms may raise a flag but we shouldn't worry abut it as Lucene uses burst trie data structure to compress data so the dictionary file is tiny compare to other files in the index.
+The need to read entired dictionary of all terms may raise a flag but we shouldn't worry as Lucene uses burst trie data structure to compress data so for any non random set of terms, a dictionary file is tiny compare to other files in the index.
 
-**CPU cycles**
 
 
 
