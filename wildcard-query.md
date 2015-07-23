@@ -29,13 +29,13 @@ The need to read entired dictionary of all terms may raise a flag but we shouldn
 
 The worry part of wild card query evaluation is this part of code in class `org.apache.lucene.search.MultiTermQueryWrapperFilter`
 
-    TermsEnum termsEnum = this.query.getTermsEnum(terms); // an iterator over all matched terms
+    TermsEnum termsEnum = this.query.getTermsEnum(terms); // return an iterator over all matched terms
     ...
     
     FixedBitSet bitSet = new FixedBitSet(context.reader().maxDoc());
     DocsEnum docsEnum = null;
     do {
-        docsEnum = termsEnum.docs(acceptDocs, docsEnum, 0);
+        docsEnum = termsEnum.docs(acceptDocs, docsEnum, 0); // return an iterator over documents containing current term
 
         int docid;
         while((docid = docsEnum.nextDoc()) != 2147483647) {
