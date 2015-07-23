@@ -1,4 +1,4 @@
-## Wild card query demystify
+## Wild card query
 
 Wild card query is kind of query where search string is in form of e.g. `*ild*` or `?ild*`. Lucene document tells us quoted
 
