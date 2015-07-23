@@ -23,11 +23,11 @@ To evaluate wild card query, Lucene first iterates over a dictionary of all term
 
 The main execution loop is over each matched term, so the memory consumption is roughly the same as of any other queries. To be precise, what we need is a bit array capable of holding all documents of an index segment.
 
-**number of IO**
+**Number of IO**
 
 The need to read entired dictionary of all terms may raise a flag but we shouldn't worry abut it as Lucene uses burst trie data structure to compress data so the dictionary file is tiny compare to other files in the index.
 
-**CPU cycle**
+**CPU cycles**
 
 
 
