@@ -21,7 +21,7 @@ To evaluate wild card query, Lucene first iterates over a dictionary of all term
 
 **Memory consumption**
 
-The main execution loop is over each matched term, so the memory consumption is roughly the same as of any other queries. To be precise, what we need is a bit array capable of holding all documents of an index segment.
+The main execution loop is over each matched term, so the memory consumption is roughly the same as of any other queries. To be precise, what we need is a bit array capable of holding ID of all documents of an index segment.
 
 **IO and CPU**
 
