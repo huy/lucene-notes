@@ -46,6 +46,11 @@ The worry part of wild card query evaluation is this part of code in class `org.
 
 The operation will become expensive if the wild card expands to too many terms and each term corresponds to just few documents in the inverted index. It is quite possible e.g. when term is filename.
 
+Notes
+
+* This source code is taken from Lucene 4.4.0
+* In current Lucene trunk, the behavoir is more less the same if the wild card expands to number of terms exceeding certain threshold (currently set to 16).
+
 **What we do to mitigate it**
 
 If a wild card expands to too many terms, it also mean that the wild card is not restrictive enough and the search will likely return many hits. 
