@@ -5,11 +5,9 @@ Wild card query is kind of query where search string is in form of e.g. `*ild*` 
     this query can be slow, as it needs to iterate over many terms. In order to prevent extremely slow
     WildcardQueries, a Wildcard term should not start with the wildcard
 
-It scares developers from using wild card query without proper explanation in which context it is valid.
-
 As part of my study how to fix a bug in filename search in Confluence, I take time to look at Lucene source code to understand how wild card query is evaluated from performance and resource consumption perspective.
 
-**Query execution from 1000 miles**
+**Query execution**
 
 Lucene provides `org.apache.lucene.search.Filter` abstract class in low level search API. Query is wrapped inside  `Filter`. One method of `Filter` class is
 
@@ -27,6 +25,9 @@ Important things about Lucene low level search operation are
 * elementary search operation use inverted index which basically maps a term (aka word) to a set of documents containing specified term. This literally means for an elemetary seach a term is needed.
 * result of elementary search is a bit map representing a set of documents
 * complex query is decomposed into serie of elemetary queries, each is evaluated, then their result are union and/or intersect to form a final list of hit documents
+
+**Combine result from individual segment search**
+
 
 **Wild card query execution and performance impact**
 
