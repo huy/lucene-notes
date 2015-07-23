@@ -27,6 +27,21 @@ The main execution loop is over each matched term, so the memory consumption is 
 
 The need to read entired dictionary of all terms may raise a flag but we shouldn't worry as Lucene uses burst trie data structure to compress data so for any non random set of terms, a dictionary file is tiny compare to other files in the index.
 
+The worry part of wild card query evaluation is this part of code in class `org.apache.lucene.search.MultiTermQueryWrapperFilter`
+
+    FixedBitSet bitSet = new FixedBitSet(context.reader().maxDoc());
+    DocsEnum docsEnum = null;
+    do {
+            docsEnum = termsEnum.docs(acceptDocs, docsEnum, 0);
+
+            int docid;
+            while((docid = docsEnum.nextDoc()) != 2147483647) {
+                bitSet.set(docid);
+            }
+    } while(termsEnum.next() != null);
+    return bitSet;
+
+
 
 
 
