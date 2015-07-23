@@ -48,5 +48,13 @@ The operation will become expensive if the wild card expands to too many terms.
 
 **What we do to mitigate it**
 
-If a wild card expands to too many terms, it also mean that the wild card is not restrictive enough and the search will likely return many hits. We will try to exploit this fact so many wild card queries will not bring down the server.
+If a wild card expands to too many terms, it also mean that the wild card is not restrictive enough and the search will likely return many hits. 
+
+Assuming that
+
+* we know maximum number of hits
+* we relax the requirement about returning top hit documents by score
+* we don't care about total hits
+
+We can retrieve just enough hit documents so many wild card queries will not bring down the server.
 
