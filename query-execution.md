@@ -4,7 +4,7 @@
 
 A complex query is rewrite i.e. decomposed with respect to query combinator (see [query combinator](query-filter.md)) into a tree of sub queries.
 
-**Filtering**
+**Filter**
 
 Each elementary query is evaluated (lazily if it is possible) bottom up, their results are combined in form of document iterator `DocEnum` satisfying the given query.
 
@@ -13,6 +13,10 @@ Internally main classes involved in filtering are `Query`, `Weight`, `Scorer`. `
 Elementary query at leaf of a query tree uses inverted index to retrieve set of documents containing specified term. This literally means for an elemetary query to work a term is needed.
 
 In a traditional query, a complete terms are presented itself in the query expression. In other type of query like wild card, fuzzy, regex, Lucene has to figure out set of terms from the query expression. It does so by iterating over a dictionary of all terms and filter out un matched terms.
+
+**Score and Sort**
+
+`Collector` is used to collect/transform hits into desire output, scoring or sorting is done in this step.
 
 ## Wild card and Fuzzy query and performance impact
 
