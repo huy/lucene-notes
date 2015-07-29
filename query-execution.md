@@ -2,7 +2,7 @@
 
 **Rewrite**
 
-A complex query is rewrite i.e. decomposed with respect to query combinator into a tree of sub queries.
+A complex query is rewrite i.e. decomposed with respect to query combinator (see [query combinator](query-filter.md)) into a tree of sub queries.
 
 **Filtering**
 
