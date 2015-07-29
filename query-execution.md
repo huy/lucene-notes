@@ -1,8 +1,14 @@
 ## How query is executed
 
-A complex query is rewrite i.e. decomposed into a tree of sub queries, each is evaluated lazily bottom up, their lazy results are combined in form of document iterator `DocEnum` satisfying the given query. 
+**Rewrite**
 
-Internally there are 3 main classes involved `Query`, `Weight` and `Scorer`. `Query` creates `Weight`, which is represents runtime aspect of `Query`, `Weight` creates `Scorer`, which is iterator of document matching the query.
+A complex query is rewrite i.e. decomposed with respect to query combinator into a tree of sub queries.
+
+**Filtering**
+
+Each elementary query is evaluated (lazily if it is possible) bottom up, their results are combined in form of document iterator `DocEnum` satisfying the given query.
+
+Internally main classes involved in filtering are `Query`, `Weight`, `Scorer`. `Query` creates `Weight`, which is represents runtime aspect of `Query`, `Weight` creates `Scorer`, which is iterator of document matching the query.
 
 Elementary query at leaf of a query tree uses inverted index to retrieve set of documents containing specified term. This literally means for an elemetary query to work a term is needed.
 
