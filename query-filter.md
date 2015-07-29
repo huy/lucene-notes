@@ -1,4 +1,4 @@
-## Query, Filter
+## Query and Filter
 
 **query vs filter**
 
