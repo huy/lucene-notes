@@ -14,9 +14,26 @@ Elementary query at leaf of a query tree uses inverted index to retrieve set of 
 
 In a traditional query, a complete terms are presented itself in the query expression. In other type of query like wild card, fuzzy, regex, Lucene has to figure out set of terms from the query expression. It does so by iterating over a dictionary of all terms and filter out un matched terms.
 
-**Score and Sort**
+**Collector**
 
-`Collector` is used to collect/transform hits into desire output, scoring or sorting is done in this step.
+`Collector` is used to collect/transform hits into desire output, scoring or sorting is done in this step. The most common collector is `TopDocsCollector`, which collects top N documents with highest relevant score. `TopDocsCollector` uses modified version of priority queue with limited size to maintain top N documents by score. E.g.
+
+    private static class InOrderTopScoreDocCollector extends TopScoreDocCollector {
+       ...
+       public void collect(int doc) throws IOException {
+            float score = this.scorer.score();
+
+            assert score != -1.0F / 0.0;
+
+            assert !Float.isNaN(score);
+
+            ++this.totalHits;
+            if(score > this.pqTop.score) {
+                this.pqTop.doc = doc + this.docBase;
+                this.pqTop.score = score;
+                this.pqTop = (ScoreDoc)this.pq.updateTop();
+            }
+        }
 
 ## Wild card and Fuzzy query and performance impact
 
