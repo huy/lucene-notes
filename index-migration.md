@@ -18,7 +18,7 @@ E.g. the default codec version of Lucene 4.4.x is 4.2 while the default codec of
 
 **Segment**
 
-Lucene index has composite structure, which mean an index consists of several sub indexes called segment. Listing an index folder, we may see something like this
+Lucene index has composite structure, which means an index consists of several sub indexes aka segment. Listing an index folder, we may see something like this
 
     -rw-r--r--  1 huyle  staff  268 19 Jul 07:55 _0.cfe
     -rw-r--r--  1 huyle  staff  647 19 Jul 07:55 _0.cfs
@@ -39,9 +39,9 @@ The index contains two segments `0` and `1`. Each segment is represented by 3 fi
 
 **Active segment**
 
-Lucene index follows single writer multiple reader paradigm. The active segment is segment currently used by the writer. Everytime the writer attempts to add/remove document, a new segment is created using the most recent codec.
+Lucene index follows single writer multiple reader paradigm. The active segment is segment currently used by the writer. Everytime the writer issues a commit, active segment is writen to disk and a new segment is created using the most recent codec amd it becomes the new active segment.
 
-When migrating to a new version of Lucene, we may endup with a index having some segments encoded by old codec and others by new codec.
+When migrating to a new version of Lucene, we may end up with a index having some segments encoded by old codec and others by new codec.
 
 The reason behind such design is to support incremental indexing with concurrent access. Its clever design means when searching is still in progress we can safely add/remove document without expensive synchronization because the search always sees the index at a point time it was opened.
 
